@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost:30080/predict"
+url = "http://localhost/predict"
 
 if __name__ == "__main__":
     payload = {"value": 2.0}
