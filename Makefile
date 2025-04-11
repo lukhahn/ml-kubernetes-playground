@@ -1,6 +1,6 @@
 APP_NAME = ml-model-api
 IMAGE_NAME = $(APP_NAME):latest
-DEPLOYMENT_FILE = k8s-deployment.yaml
+KUSTOMIZE_DIR = kubernetes/base
 
 .PHONY: all train build deploy infer clean
 
@@ -11,10 +11,10 @@ build: train
 	docker build -t $(IMAGE_NAME) .
 
 deploy:
-	kubectl apply -f $(DEPLOYMENT_FILE)
+	kubectl apply -k $(KUSTOMIZE_DIR)
 
 infer:
 	python infer.py
 
 clean:
-	kubectl delete -f $(DEPLOYMENT_FILE)
+	kubectl delete -k $(KUSTOMIZE_DIR)
